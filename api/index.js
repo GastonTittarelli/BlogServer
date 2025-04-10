@@ -1,16 +1,13 @@
 const jsonServer = require('json-server');
 const path = require('path');
 
-// Vercel Lambda handler
-module.exports = (req, res) => {
-  const server = jsonServer.create();
-  const router = jsonServer.router(path.join(__dirname, '../db.json'));
-  const middlewares = jsonServer.defaults();
+const server = jsonServer.create();
+const router = jsonServer.router(path.join(__dirname, '..', 'db.json'));
+const middlewares = jsonServer.defaults();
 
-  server.use(middlewares);
-  server.use(router);
+server.use(middlewares);
+server.use(router);
 
-  server(req, res);
-};
-
+// Export as a Vercel handler
+module.exports = server;
 
